@@ -2,7 +2,7 @@
 
 <?php 
 
-function gettransaction(string $dir)
+function gettransactionfile(string $dir):array
 {
 
     $file = [];
@@ -18,6 +18,26 @@ function gettransaction(string $dir)
     return $file;
 
 
+}
+
+function gettransaction(string $filename):array{
+
+    
+    if (!file_exists($filename)) {
+        trigger_error(`file {$filename} no found`,E_USER_ERROR);
+    }
+    
+    $file = fopen($filename, 'r');
+    
+    fgetcsv($file); 
+
+    $transactions = [];
+    
+
+    while(($transaction = fgetcsv($file)) !== false) {
+        $transactions[]=$transaction;
+}
+return $transactions;
 }
 
 ?>

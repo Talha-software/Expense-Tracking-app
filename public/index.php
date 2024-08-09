@@ -11,6 +11,13 @@ define("SHOW_PATH", $root . 'show' . DIRECTORY_SEPARATOR);
 
 require APP_PATH . 'app.php';
 
-$file = gettransaction(FILE_PATH);
-print_r($file);
+$files = gettransactionfile(FILE_PATH);
+$transactions = [];
+foreach($files as $file)
+{
+    $transactions = array_merge($transactions , gettransaction($file));
+}
+
+// print_r($transactions);
+require SHOW_PATH . 'show.php';
 ?>
