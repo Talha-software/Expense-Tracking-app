@@ -1,14 +1,12 @@
+<?php
 
-
-<?php 
-
-function gettransactionfile(string $dir):array
+function gettransactionfile(string $dir): array
 {
 
     $file = [];
 
     foreach (scandir($dir) as $files) {
-        if(is_dir($files)){
+        if (is_dir($files)) {
             continue;
         }
 
@@ -20,24 +18,25 @@ function gettransactionfile(string $dir):array
 
 }
 
-function gettransaction(string $filename):array{
+function gettransaction(string $filename): array
+{
 
-    
+
     if (!file_exists($filename)) {
-        trigger_error(`file {$filename} no found`,E_USER_ERROR);
+        trigger_error(`file {$filename} no found`, E_USER_ERROR);
     }
-    
+
     $file = fopen($filename, 'r');
-    
-    fgetcsv($file); 
+
+    fgetcsv($file);
 
     $transactions = [];
-    
 
-    while(($transaction = fgetcsv($file)) !== false) {
-        $transactions[]=$transaction;
-}
-return $transactions;
+
+    while (($transaction = fgetcsv($file)) !== false) {
+        $transactions[] = $transaction;
+    }
+    return $transactions;
 }
 
 ?>
