@@ -71,4 +71,12 @@ function calculateTransaction(array $transactions):array
         return $total;
 }
 
+
+function formatAmount(float $amount):string
+{
+    $isNegative = $amount < 0;
+    return ($isNegative ? '-': '') . '$' . number_format($amount,2);
+
+}
+
 ?>

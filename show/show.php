@@ -48,7 +48,7 @@
                         <td><?= $transaction['date'] ?></td>
                         <td><?= $transaction['check'] ?></td>
                         <td><?= $transaction['description'] ?></td>
-                        <td><?= $transaction['amount'] ?></td>
+                        <td><?= formatAmount($transaction['amount']) ?></td>
                     </tr>
                 <?php endforeach;
             endif;
@@ -58,15 +58,15 @@
         <tfoot>
             <tr>
                 <th colspan="3">Total Income:</th>
-                <td><?= $total['totalIncome'] ?? 0?></td>
+                <td><?= formatAmount($total['totalIncome'] ?? 0) ?></td>
             </tr>
             <tr>
                 <th colspan="3">Total Expense:</th>
-                <td><?= $total['totalExpense'] ?? 0?></td>
+                <td><?= formatAmount($total['totalExpense'] ?? 0)?></td>
             </tr>
             <tr>
                 <th colspan="3">Net Total:</th>
-                <td><?= $total['netTotal'] ?? 0?></td>
+                <td><?= formatAmount($total['netTotal'] ?? 0)?></td>
             </tr>
         </tfoot>
     </table>
