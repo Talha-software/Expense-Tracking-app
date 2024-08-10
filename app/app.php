@@ -39,10 +39,11 @@ function getTransaction(string $filename): array
     return $transactions;
 }
 
-function extractTransaction(array $transactionRow):array{
+function extractTransaction(array $transactionRow): array
+{
 
-    [$date,$check,$description,$amount] = $transactionRow;
-    $amount = (float) str_replace(['$',','],'',$amount);
+    [$date, $check, $description, $amount] = $transactionRow;
+    $amount = (float) str_replace(['$', ','], '', $amount);
     return [
         'date' => $date,
         'check' => $check,
@@ -51,7 +52,7 @@ function extractTransaction(array $transactionRow):array{
     ];
 }
 
-function calculateTransaction(array $transactions):array
+function calculateTransaction(array $transactions): array
 {
     $total = [
         'netTotal' => 0,
@@ -68,15 +69,20 @@ function calculateTransaction(array $transactions):array
             $total['totalExpense'] += $transaction['amount'];
         }
     }
-        return $total;
+    return $total;
 }
 
 
-function formatAmount(float $amount):string
+function formatAmount(float $amount): string
 {
     $isNegative = $amount < 0;
-    return ($isNegative ? '-': '') . '$' . number_format($amount,2);
+    return ($isNegative ? '-' : '') . '$' . number_format(abs($amount), 2);
 
+}
+
+function formatDate(string $date): string
+{
+    return date('M j, Y', strtotime($date));
 }
 
 ?>

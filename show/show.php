@@ -45,10 +45,28 @@
             if (!empty($transactions)):
                 foreach ($transactions as $transaction): ?>
                     <tr>
-                        <td><?= $transaction['date'] ?></td>
+                        <td><?= formatDate($transaction['date']) ?></td>
                         <td><?= $transaction['check'] ?></td>
                         <td><?= $transaction['description'] ?></td>
-                        <td><?= formatAmount($transaction['amount']) ?></td>
+                        <td>
+                            <?php if ($transaction['amount'] < 0): ?>
+                                <span style="color: red;">
+                                    <?= formatAmount($transaction['amount']) ?>
+                                </span>
+
+                            <?php elseif ($transaction['amount'] > 0): ?>
+                                <span style="color: green;">
+                                    <?= formatAmount($transaction['amount']) ?>
+                                </span>
+                            <?php
+                            else:
+                                ?>
+                                <?= formatAmount($transaction['amount']) ?>
+                            <?php endif; ?>
+
+
+
+                        </td>
                     </tr>
                 <?php endforeach;
             endif;
@@ -62,11 +80,11 @@
             </tr>
             <tr>
                 <th colspan="3">Total Expense:</th>
-                <td><?= formatAmount($total['totalExpense'] ?? 0)?></td>
+                <td><?= formatAmount($total['totalExpense'] ?? 0) ?></td>
             </tr>
             <tr>
                 <th colspan="3">Net Total:</th>
-                <td><?= formatAmount($total['netTotal'] ?? 0)?></td>
+                <td><?= formatAmount($total['netTotal'] ?? 0) ?></td>
             </tr>
         </tfoot>
     </table>
