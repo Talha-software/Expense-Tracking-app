@@ -45,10 +45,10 @@
             if (!empty($transactions)):
                 foreach ($transactions as $transaction): ?>
                     <tr>
-                        <td><?= $transaction[0] ?></td>
-                        <td><?= $transaction[1] ?></td>
-                        <td><?= $transaction[2] ?></td>
-                        <td><?= $transaction[3] ?></td>
+                        <td><?= $transaction['date'] ?></td>
+                        <td><?= $transaction['check'] ?></td>
+                        <td><?= $transaction['description'] ?></td>
+                        <td><?= $transaction['amount'] ?></td>
                     </tr>
                 <?php endforeach;
             endif;
@@ -58,15 +58,15 @@
         <tfoot>
             <tr>
                 <th colspan="3">Total Income:</th>
-                <td></td>
+                <td><?= $total['totalIncome'] ?? 0?></td>
             </tr>
             <tr>
                 <th colspan="3">Total Expense:</th>
-                <td></td>
+                <td><?= $total['totalExpense'] ?? 0?></td>
             </tr>
             <tr>
                 <th colspan="3">Net Total:</th>
-                <td></td>
+                <td><?= $total['netTotal'] ?? 0?></td>
             </tr>
         </tfoot>
     </table>

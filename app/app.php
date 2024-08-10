@@ -1,6 +1,6 @@
 <?php
 
-function gettransactionfile(string $dir): array
+function getTransactionFile(string $dir): array
 {
 
     $file = [];
@@ -18,7 +18,7 @@ function gettransactionfile(string $dir): array
 
 }
 
-function gettransaction(string $filename): array
+function getTransaction(string $filename): array
 {
 
 
@@ -34,9 +34,41 @@ function gettransaction(string $filename): array
 
 
     while (($transaction = fgetcsv($file)) !== false) {
-        $transactions[] = $transaction;
+        $transactions[] = extractTransaction($transaction);
     }
     return $transactions;
+}
+
+function extractTransaction(array $transactionRow):array{
+
+    [$date,$check,$description,$amount] = $transactionRow;
+    $amount = (float) str_replace(['$',','],'',$amount);
+    return [
+        'date' => $date,
+        'check' => $check,
+        'description' => $description,
+        'amount' => $amount,
+    ];
+}
+
+function calculateTransaction(array $transactions):array
+{
+    $total = [
+        'netTotal' => 0,
+        'totalExpense' => 0,
+        'totalIncome' => 0,
+    ];
+
+    foreach ($transactions as $transaction) {
+        $total['netTotal'] += $transaction['amount'];
+
+        if ($transaction['amount'] >= 0) {
+            $total['totalIncome'] += $transaction['amount'];
+        } else {
+            $total['totalExpense'] += $transaction['amount'];
+        }
+    }
+        return $total;
 }
 
 ?>

@@ -9,10 +9,10 @@ define("SHOW_PATH", $root . 'show' . DIRECTORY_SEPARATOR);
 
 require APP_PATH . 'app.php';
 
-$files = gettransactionfile(FILE_PATH);
+$files = getTransactionFile(FILE_PATH);
 $transactions = [];
 foreach ($files as $file) {
-    $transactions = array_merge($transactions, gettransaction($file));
+    $transactions = array_merge($transactions, getTransaction($file));
 }
-
+$total = calculateTransaction($transactions);
 require SHOW_PATH . 'show.php';
