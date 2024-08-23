@@ -1,4 +1,4 @@
-Overview
+**Overview**
 
 This Expense Tracking App is a simple, yet effective tool to manage your finances. Built using HTML, CSS, and PHP, the app allows you to track your income and expenses efficiently. It reads data from a given SVC file, formats it, adds income, tracks expenses, and calculates the net total, providing a comprehensive view of your financial status.
 
